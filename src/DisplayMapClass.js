@@ -11,7 +11,7 @@ export class DisplayMapClass extends React.Component {
 
   componentDidMount() {
     const defaultLayers = platform.createDefaultLayers();
-
+    debugger
     // Create an instance of the map
     const map = new H.Map(
       this.mapRef.current,
