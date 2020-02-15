@@ -8,18 +8,16 @@ export class DisplayMapClass extends React.Component {
     // The map instance to use during cleanup
     map: null
   };
-
   componentDidMount() {
     const defaultLayers = platform.createDefaultLayers();
-    debugger
     // Create an instance of the map
-    const map = new H.Map(
+    const map = new window.H.Map(
       this.mapRef.current,
       defaultLayers.vector.normal.map,
       {
         // This map is centered over Europe
-        center: { lat: 50, lng: 5 },
-        zoom: 4,
+	center:{lat: 37.7874102, lng:-122.3974609},
+        zoom: 17,
         pixelRatio: window.devicePixelRatio || 1
       }
     );
@@ -39,3 +37,5 @@ export class DisplayMapClass extends React.Component {
     );
   }
 }
+
+export default DisplayMapClass
