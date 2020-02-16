@@ -22,23 +22,26 @@ class DisplayMapClass extends React.Component {
     );
 
     const routingParameters = [
-    { 
+    { // fremont and howard to howard and 2nd
       "mode": "fastest;car",
       "waypoint0": "geo!37.78924,-122.39510",
       "waypoint1": "geo!37.786796,-122.398276",
       "representation": "display"
     },
-    { "mode": "fastest;car",
+    { // natoma and first to folsom and first
+      "mode": "fastest;car",
       "waypoint0": "geo!37.789076,-122.396581",
       "waypoint1": "geo!37.787224,-122.394406",
       "representation": "display"
     },
-    { "mode": "fastest;car",
+    { // 2nd and folsom to folsom and fremont
+      "mode": "fastest;car",
       "waypoint0": "geo!37.785656,-122.396696",
       "waypoint1": "geo!37.787990,-122.393735",
       "representation": "display"
     },
-    { "mode": "fastest;car",
+    { // 2nd and minna to 2nd and folsom
+      "mode": "fastest;car",
       "waypoint0": "geo!37.787846,-122.399293",
       "waypoint1": "geo!37.785596,-122.396761",
       "representation": "display"
@@ -112,14 +115,8 @@ var bubble = new window.H.ui.InfoBubble({ lng: -122.3965, lat: 37.7871 }, {
       console.log(window.H.ui)
       //window.H.ui.InfoBubble(bubble);
 
-<<<<<<< HEAD
-    let ui = window.H.ui.UI.createDefault(map, defaultLayers).getControl('zoom').setEnabled(false);
-    // ui.f.zoom = false
-    // ui.getControl('zoom').setEnabled(false)
-=======
     new window.H.mapevents.Behavior(new window.H.mapevents.MapEvents(map));
     window.H.ui.UI.createDefault(map, defaultLayers);
->>>>>>> 108df2d150545d8af66e729ebf3008b23c2f9391
 
     this.setState({ map });
   }
