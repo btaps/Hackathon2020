@@ -16,9 +16,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 Our proof of concept simply makes use of a localhost, we also plan on creating an instance running as a webapplication on a hosted environment using Heroku.
 
-```
-Give examples
-```
+
 
 ### Agora Application
 
@@ -28,27 +26,9 @@ This application uses a React framework to create an addEventListener to run a w
 
 ## Siren Detection
 
-A Python module with appropriate ML/DL libraries loads and inferences a .wav audio file to  
+A Python module with appropriate ML/DL libraries loads and inferences a .wav audio file using a pretrained model to determine an accuracy score to change lights in our simulation.   
 
-### Break down into end to end tests
 
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
@@ -85,6 +65,9 @@ This project is licensed under the MIT License
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+
+## AGORA APPLICATION README
 
 ## Available Scripts
 
