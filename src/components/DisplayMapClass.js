@@ -29,26 +29,54 @@ class DisplayMapClass extends React.Component {
       "representation": "display",
       "intensity": 1
     },
-    { // natoma and first to folsom and first
+    { // natoma and 1st to folsom and 1st
       "mode": "fastest;car",
       "waypoint0": "geo!37.789076,-122.396581",
       "waypoint1": "geo!37.787224,-122.394406",
       "representation": "display",
-      "intensity": 4
+      "intensity": 1
     },
     { // 2nd and folsom to folsom and fremont
       "mode": "fastest;car",
-      "waypoint0": "geo!37.785656,-122.396696",
+      "waypoint0": "geo!37.785550,-122.396748",
       "waypoint1": "geo!37.787990,-122.393735",
       "representation": "display",
-      "intensity": 7
+      "intensity": 1
     },
     { // 2nd and minna to 2nd and folsom
       "mode": "fastest;car",
       "waypoint0": "geo!37.787846,-122.399293",
       "waypoint1": "geo!37.785596,-122.396761",
       "representation": "display",
-      "intensity": 10
+      "intensity": 1
+    },
+    { // 1st and folsom to 1st and harrison
+      "mode": "fastest;car",
+      "waypoint0": "geo!37.787296,-122.394487",
+      "waypoint1": "geo!37.786114,-122.393009",
+      "representation": "display",
+      "intensity": 4
+    },
+    { // 2nd and folsom to 2nd and harrison
+      "mode": "fastest;car",
+      "waypoint0": "geo!37.785546,-122.396740",
+      "waypoint1": "geo!37.784300,-122.395183",
+      "representation": "display",
+      "intensity": 4
+    },
+    { // folsom and hawthorne to 2nd and folsom
+      "mode": "fastest;car",
+      "waypoint0": "geo!37.784656,-122.397842",
+      "waypoint1": "geo!37.785550,-122.396748",
+      "representation": "display",
+      "intensity": 4
+    },
+    { // howard and 2nd to howard to hawthorne
+      "mode": "fastest;car",
+      "waypoint0": "geo!37.786759,-122.398254",
+      "waypoint1": "geo!37.785880,-122.399374",
+      "representation": "display",
+      "intensity": 4
     },
     ]
 
@@ -58,8 +86,6 @@ class DisplayMapClass extends React.Component {
       let onResult = function(result) {
         let route
         let routeShape
-        let startPoint
-        let endPoint
         let linestring
         
         if(result.response.route) {
@@ -70,9 +96,6 @@ class DisplayMapClass extends React.Component {
             let parts = point.split(',')
             linestring.pushLatLngAlt(parts[0], parts[1])
           })
-
-          startPoint = route.waypoint[0].mappedPosition
-          endPoint = route.waypoint[1].mappedPosition
           // make call to backend to get traffic intensity to determine strokeColor and lineWidth
           
           let routeLine = new window.H.map.Polyline(linestring, {
@@ -84,16 +107,6 @@ class DisplayMapClass extends React.Component {
                               : "red"
 
             , lineWidth: 3}
-          })
-
-          let startMarker = new window.H.map.Marker({
-            lat: startPoint.latitude,
-            lng: startPoint.longitude
-          })
-
-          let endMarker = new window.H.map.Marker({
-            lat: endPoint.latitude,
-            lng: endPoint.longitude
           })
           map.addObjects([routeLine])
           new window.H.map.Marker(map.getCenter());
@@ -112,18 +125,12 @@ class DisplayMapClass extends React.Component {
 
 
 
-var berlinMarker = new window.H.map.Marker({
-  lat:37.7871,
-  lng:-122.3965
-});
-map.addObject(berlinMarker);             
+    var berlinMarker = new window.H.map.Marker({
+      lat:37.7871,
+      lng:-122.3965
+    });
+    map.addObject(berlinMarker);             
 
-// Add info bubble to the UI:
-var bubble = new window.H.ui.InfoBubble({ lng: -122.3965, lat: 37.7871 }, {
-                content: '<b>Hello World!</b>'
-});
-      console.log(window.H.ui)
-      //window.H.ui.InfoBubble(bubble);
 
     new window.H.mapevents.Behavior(new window.H.mapevents.MapEvents(map));
     window.H.ui.UI.createDefault(map, defaultLayers);
