@@ -7,14 +7,31 @@ class DisplayMapClass extends React.Component {
   mapRef = React.createRef();
   state = {
     map: null,
-    data: []
+    data:{
+      road:{
+        '0': 10,
+        '1': 10,
+        '2': 10,
+        '3': 10,
+        '4': 10,
+        '5': 10,
+        '6': 10,
+        '7': 10,
+      },
+      light:{'0': 4},
+    },
+      data2: null,
   };
+  
 
-  componentDidMount() {
-    
-  setInterval(()=>{
+ componentDidMount() {
+    setInterval(()=>{
       this.fetchData()
-    }, 5000)
+	  //console.log(this.state.data)
+	  //console.log(this.state.data.road['0']=== undefined? 'loading..': this.state.data.road['0'])
+   console.log(this.state.data2 === null)
+  console.log( this.state.data2 === null? 'loading' : typeof(this.state.data2.road['0']))
+    }, 500)
     
     const defaultLayers = platform.createDefaultLayers();
 
@@ -34,7 +51,7 @@ class DisplayMapClass extends React.Component {
       "waypoint0": "geo!37.786759,-122.398254",
       "waypoint1": "geo!37.785880,-122.399374",
       "representation": "display",
-      "intensity": 4, // Road 0
+      "intensity": this.state.data2 === null? 6: this.state.data2.road['0'], // Road 0
       "routeArrows": true
     },
     { // 2nd and minna to 2nd and folsom
@@ -42,7 +59,7 @@ class DisplayMapClass extends React.Component {
       "waypoint0": "geo!37.787846,-122.399293",
       "waypoint1": "geo!37.785596,-122.396761",
       "representation": "display",
-      "intensity": 1, // Road 1
+      "intensity": this.state.data.road['1'], // Road 1
       "routeArrows": true
     },
     { // natoma and 1st to folsom and 1st
@@ -50,7 +67,7 @@ class DisplayMapClass extends React.Component {
       "waypoint0": "geo!37.789076,-122.396581",
       "waypoint1": "geo!37.787224,-122.394406",
       "representation": "display",
-      "intensity": 1, // Road 2
+      "intensity": this.state.data.road['2'], // Road 2
       "routeArrows": true
     },
     { // fremont and howard to howard and 2nd
@@ -58,7 +75,7 @@ class DisplayMapClass extends React.Component {
       "waypoint0": "geo!37.78924,-122.39510",
       "waypoint1": "geo!37.786796,-122.398276",
       "representation": "display",
-      "intensity": 1, // Road 3
+      "intensity": this.state.data.road['3'], // Road 3
       "routeArrows": true
     },
     { // 2nd and folsom to folsom and fremont
@@ -66,7 +83,7 @@ class DisplayMapClass extends React.Component {
       "waypoint0": "geo!37.785550,-122.396748",
       "waypoint1": "geo!37.787990,-122.393735",
       "representation": "display",
-      "intensity": 1, // Road 4
+      "intensity": this.state.data.road['4'], // Road 4
       "routeArrows": true
     },
     { // 1st and folsom to 1st and harrison
@@ -74,7 +91,7 @@ class DisplayMapClass extends React.Component {
       "waypoint0": "geo!37.787296,-122.394487",
       "waypoint1": "geo!37.786114,-122.393009",
       "representation": "display",
-      "intensity": 4, // Road 5
+      "intensity": this.state.data.road['5'], // Road 5
       "routeArrows": true
     },
     { // 2nd and folsom to 2nd and harrison
@@ -82,7 +99,7 @@ class DisplayMapClass extends React.Component {
       "waypoint0": "geo!37.785546,-122.396740",
       "waypoint1": "geo!37.784300,-122.395183",
       "representation": "display",
-      "intensity": 4, // Road 6
+      "intensity": this.state.data.road['6'], // Road 6
       "routeArrows": true
     },
     { // folsom and hawthorne to 2nd and folsom
@@ -90,7 +107,7 @@ class DisplayMapClass extends React.Component {
       "waypoint0": "geo!37.784656,-122.397842",
       "waypoint1": "geo!37.785550,-122.396748",
       "representation": "display",
-      "intensity": 4, // Road 7
+      "intensity": this.state.data.road['7'], // Road 7
       "routeArrows": true
     },
     {  // Traffic light: Howard and 2nd NE to SW
@@ -239,18 +256,12 @@ class DisplayMapClass extends React.Component {
     this.setState({ map });
   }
   
-  componentWillUnmount() {
-    this.state.map.dispose();
-  }
 
   fetchData = ()=>{
     RouteModels.all()
-	  .then(data=> console.log(data))
-    .then(data => {
-      this.setState({
-        data: data
+      .then(data=> {
+	      this.setState({data2: data})
       })
-    })
   }
 
   render() {
