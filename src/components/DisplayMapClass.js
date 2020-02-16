@@ -26,70 +26,80 @@ class DisplayMapClass extends React.Component {
       "mode": "fastest;car",
       "waypoint0": "geo!37.78924,-122.39510",
       "waypoint1": "geo!37.786796,-122.398276",
-      "representation": "display"
+      "representation": "display",
+      "intensity": 1
     },
     { // natoma and first to folsom and first
       "mode": "fastest;car",
       "waypoint0": "geo!37.789076,-122.396581",
       "waypoint1": "geo!37.787224,-122.394406",
-      "representation": "display"
+      "representation": "display",
+      "intensity": 4
     },
     { // 2nd and folsom to folsom and fremont
       "mode": "fastest;car",
       "waypoint0": "geo!37.785656,-122.396696",
       "waypoint1": "geo!37.787990,-122.393735",
-      "representation": "display"
+      "representation": "display",
+      "intensity": 7
     },
     { // 2nd and minna to 2nd and folsom
       "mode": "fastest;car",
       "waypoint0": "geo!37.787846,-122.399293",
       "waypoint1": "geo!37.785596,-122.396761",
-      "representation": "display"
+      "representation": "display",
+      "intensity": 10
     },
     ]
 
-      let onResult = function(result) {
-      let route
-      let routeShape
-      let startPoint
-      let endPoint
-      let linestring
-      
-      if(result.response.route) {
-        route = result.response.route[0]
-        routeShape = route.shape
-        linestring = new window.H.geo.LineString()
-        routeShape.forEach(function(point) {
-          let parts = point.split(',')
-          linestring.pushLatLngAlt(parts[0], parts[1])
-        })
-
-        startPoint = route.waypoint[0].mappedPosition
-        endPoint = route.waypoint[1].mappedPosition
-
-        let routeLine = new window.H.map.Polyline(linestring, {
-          arrows: {fillColor: "red"}
-        })
-
-        let startMarker = new window.H.map.Marker({
-          lat: startPoint.latitude,
-          lng: startPoint.longitude
-        })
-
-        let endMarker = new window.H.map.Marker({
-          lat: endPoint.latitude,
-          lng: endPoint.longitude
-        })
-        map.addObjects([routeLine])
-        new window.H.map.Marker(map.getCenter());
-        map.getViewModel().setLookAtData({bounds: routeLine.getBoundingBox()})
-
-        map.addLayer(defaultLayers.vector.normal.traffic)
-      }
-    }
 
     let router = platform.getRoutingService()
     routingParameters.map((routingParameter)=>{
+      let onResult = function(result) {
+        let route
+        let routeShape
+        let startPoint
+        let endPoint
+        let linestring
+        
+        if(result.response.route) {
+          route = result.response.route[0]
+          routeShape = route.shape
+          linestring = new window.H.geo.LineString()
+          routeShape.forEach(function(point) {
+            let parts = point.split(',')
+            linestring.pushLatLngAlt(parts[0], parts[1])
+          })
+
+          startPoint = route.waypoint[0].mappedPosition
+          endPoint = route.waypoint[1].mappedPosition
+          // make call to backend to get traffic intensity to determine strokeColor and lineWidth
+          
+          let routeLine = new window.H.map.Polyline(linestring, {
+            style: {
+              strokeColor: routingParameter.intensity <= 3 
+                            ? "blue"
+                            : routingParameter.intensity > 3 && routingParameter.intensity <= 7
+                              ? "orange"
+                              : "red"
+
+            , lineWidth: 3}
+          })
+
+          let startMarker = new window.H.map.Marker({
+            lat: startPoint.latitude,
+            lng: startPoint.longitude
+          })
+
+          let endMarker = new window.H.map.Marker({
+            lat: endPoint.latitude,
+            lng: endPoint.longitude
+          })
+          map.addObjects([routeLine])
+          new window.H.map.Marker(map.getCenter());
+          map.getViewModel().setLookAtData({bounds: routeLine.getBoundingBox()})
+        }
+      }
       return(
         router.calculateRoute(routingParameter, onResult, function(err){
           alert(err.message)
