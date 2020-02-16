@@ -78,6 +78,70 @@ class DisplayMapClass extends React.Component {
       "representation": "display",
       "intensity": 4
     },
+    { // Traffic light: Howard and 1st NE to SW
+      "mode": "fastest;car",
+      "waypoint0": "geo!37.788616,-122.395926",
+      "waypoint1": "geo!37.788471,-122.396099",
+      "representation": "display",
+      "intensity": 11,
+      "lineWidth": 10
+    },
+    { // Traffic light: Howard and 1st NW to SE
+      "mode": "fastest;car",
+      "waypoint0": "geo!37.788616,-122.396120",
+      "waypoint1": "geo!37.788484,-122.395954",
+      "representation": "display",
+      "intensity": 12,
+      "lineWidth": 10
+    },
+    { // Traffic light: Folsom and 1st SW to NE
+      "mode": "fastest;car",
+      "waypoint0": "geo!37.787263,-122.394546",
+      "waypoint1": "geo!37.787395,-122.394358",
+      "representation": "display",
+      "intensity": 11,
+      "lineWidth": 10
+    },
+    {  //Traffic light: Folsom and 1st NW to SE
+      "mode": "fastest;car",
+      "waypoint0": "geo!37.787378,-122.394572",
+      "waypoint1": "geo!37.787233,-122.394406",
+      "representation": "display",
+      "intensity": 12,
+      "lineWidth": 10
+    },
+    {  //Traffic light: Folsom and 2nd SW to NE
+      "mode": "fastest;car",
+      "waypoint0": "geo!37.785453,-122.396858",
+      "waypoint1": "geo!37.785678,-122.396638",
+      "representation": "display",
+      "intensity": 11,
+      "lineWidth": 10
+    },
+    {  //Traffic light: Folsom and 2nd NW to SE
+      "mode": "fastest;car",
+      "waypoint0": "geo!37.785656,-122.396852",
+      "waypoint1": "geo!37.785470,-122.396627",
+      "representation": "display",
+      "intensity": 12,
+      "lineWidth": 10
+    },
+    {  //Traffic light: Howard and 2nd NE to SW
+      "mode": "fastest;car",
+      "waypoint0": "geo!37.786856,-122.398183",
+      "waypoint1": "geo!37.786716,-122.398338",
+      "representation": "display",
+      "intensity": 12,
+      "lineWidth": 10
+    },
+    {  //Traffic light: Howard and 2nd NW to SE
+      "mode": "fastest;car",
+      "waypoint0": "geo!37.786852,-122.398365",
+      "waypoint1": "geo!37.786716,-122.398177",
+      "representation": "display",
+      "intensity": 11,
+      "lineWidth": 10
+    },
     ]
 
 
@@ -104,9 +168,13 @@ class DisplayMapClass extends React.Component {
                             ? "blue"
                             : routingParameter.intensity > 3 && routingParameter.intensity <= 7
                               ? "orange"
-                              : "red"
+                              : routingParameter.intensity > 7 && routingParameter.intensity <= 10
+		                ? "red"
+		                : routingParameter.intensity === 11
+		                  ? "green"
+		                  : "red"
 
-            , lineWidth: 3}
+	 , lineWidth: routingParameter.lineWidth? routingParameter.lineWidth: 3}
           })
           map.addObjects([routeLine])
           new window.H.map.Marker(map.getCenter());
@@ -122,15 +190,21 @@ class DisplayMapClass extends React.Component {
     //router.calculateRoute(routingParameters, onResult, function(err){
      // alert(err.message)
     //})
+    // Add info bubble to the UI:
 
+    const ui = window.H.ui.UI.createDefault(map,defaultLayers)
+    const hackathonMarker = new window.H.map.Marker({lat:37.7871,lng:-122.3965});
+    
+    hackathonMarker.setData("<p>Hackathon 2020<p>");
+    hackathonMarker.addEventListener("tap", event=>{
+      const bubble = new window.H.ui.InfoBubble(console.log(event.target), {
+                content: event.target.getData()
+             });
+      ui.addBubble(bubble)
+    }, false);
 
-
-    var berlinMarker = new window.H.map.Marker({
-      lat:37.7871,
-      lng:-122.3965
-    });
-    map.addObject(berlinMarker);             
-
+    map.addObject(hackathonMarker);             
+    
 
     new window.H.mapevents.Behavior(new window.H.mapevents.MapEvents(map));
     window.H.ui.UI.createDefault(map, defaultLayers);
