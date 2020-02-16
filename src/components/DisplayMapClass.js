@@ -18,14 +18,15 @@ class DisplayMapClass extends Component {
       {
         // This map is centered over Europe
 	center:{lat: 37.7871, lng:-122.3965},
-        zoom: 17.7,  //17.7
+        zoom: 17.7, 
         pixelRatio: window.devicePixelRatio || 1,
       }
     );
-
+    new window.H.mapevents.Behavior(new window.H.mapevents.MapEvents(map));
+    window.H.ui.UI.createDefault(map, defaultLayers);
+    let marker = this.state.map ? new window.H.marker({lat: 37.7871, lng:-122.3965}): ''
     this.setState({ map });
   }
-
   componentWillUnmount() {
     // Cleanup after the map to avoid memory leaks when this component exits the page
     this.state.map.dispose();
