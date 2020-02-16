@@ -3,7 +3,7 @@
 
 As a team we are interested in using the HERE API to produce a real-time interactive application to simulate traffic lights based on streaming data. The Map API is to determine coordinates of longitude and latitude and analyze the traffic flow on each street. For this proof of concept, we used sixteen points, on a four by four grid in a small sample map of downtown San Francisco. To determine the color of the light, the current traffic flow value is used as a baseline, with a negative flow indicating red and a positive flow indicating green.
 
-For our implementation of our application, we used React Framework with Javascript  Reinforcement Learning framework using Q-learning. Our data is parsed from a JSON format and passed on to our model to generate a dynamic graphical representation of traffic four-way light. The goal for this work is to optimize traffic lights to reflect real world driving conditions. For example, by knowing the current traffic flow, traffic lights can be automated to change based on the intensity of traffic. If a sensor heres a current siren, it will change light color accordingly to allow for prioritized access.  
+For the implementation of our application, we used React Framework based on Javascript with a Python Reinforcement Learning framework using Q-learning. Our data is parsed from a JSON format and passed on to our model to generate a dynamic graphical representation of a traffic four-way light. The goal for this work is to optimize traffic lights to reflect real world driving conditions. For example, by knowing the current traffic flow, traffic lights can be automated to change based on the intensity of traffic. If the model hears a current siren, it will change light color accordingly to allow for prioritized access. Our goal is that the simulation can be used in production to create a smart road system using 5G network to create less congested roads. 
 
 # Architectural Overview
 ![Test Image 3](/diagram.jpeg)
@@ -58,9 +58,9 @@ This project is licensed under the MIT License
 
 ## Acknowledgments
 
-* To DeveloperWeek staff and Hackathon volunteers, also Galvanize for allowing to use workspace
+* To DeveloperWeek staff and Hackathon volunteers, also Galvanize for allowing to use the workspace
 * Sponors Yubikeys, Agora, HERE for mentoring and documentation
-* etc
+
 
 
 
