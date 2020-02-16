@@ -14,8 +14,8 @@ class DisplayMapClass extends React.Component {
       this.mapRef.current,
       defaultLayers.vector.normal.map,
       {
-        center: { lat: 52.51, lng: 13.4 },
-        zoom: 10,
+        center: {lat: 37.7871, lng:-122.3965},
+        zoom: 17.7,
         pixelRatio: window.devicePixelRatio || 1
       }
     );
@@ -78,7 +78,6 @@ class DisplayMapClass extends React.Component {
 
     this.setState({ map });
   }
-
   componentWillUnmount() {
     this.state.map.dispose();
   }
