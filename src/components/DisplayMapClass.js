@@ -48,7 +48,7 @@ class DisplayMapClass extends React.Component {
     },
     ]
 
-      let onResult = function(result) {
+    let onResult = function(result) {
       let route
       let routeShape
       let startPoint
