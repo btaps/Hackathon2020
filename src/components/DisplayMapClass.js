@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {platform} from "../config/platform";
+import './DisplayMapClass.css'
 
-export class DisplayMapClass extends React.Component {
+class DisplayMapClass extends Component {
   mapRef = React.createRef();
 
   state = {
@@ -17,8 +18,8 @@ export class DisplayMapClass extends React.Component {
       {
         // This map is centered over Europe
 	center:{lat: 37.7874102, lng:-122.3974609},
-        zoom: 17,
-        pixelRatio: window.devicePixelRatio || 1
+        zoom: 17.7,  //17.7
+        pixelRatio: window.devicePixelRatio || 1,
       }
     );
 
@@ -31,10 +32,11 @@ export class DisplayMapClass extends React.Component {
   }
 
   render() {
+	  console.log(window.H)
     return (
-      // Set a height on the map so it will display
-      <div ref={this.mapRef} style={{ height: "500px" }} />
+        <div ref={this.mapRef} className='Map' />
     );
   }
 }
 
+export default DisplayMapClass
