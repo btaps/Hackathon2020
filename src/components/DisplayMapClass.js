@@ -6,17 +6,16 @@ import './DisplayMapClass.css'
 class DisplayMapClass extends React.Component {
   mapRef = React.createRef();
   state = {
-    map: null
+    map: null,
+    data: []
   };
 
   componentDidMount() {
     
-  // 500
   setInterval(()=>{
       this.fetchData()
     }, 5000)
     
-
     const defaultLayers = platform.createDefaultLayers();
 
     const map = new window.H.Map(
@@ -94,7 +93,7 @@ class DisplayMapClass extends React.Component {
       "intensity": 4, // Road 7
       "routeArrows": true
     },
-    {  //Traffic light: Howard and 2nd NE to SW
+    {  // Traffic light: Howard and 2nd NE to SW
       "mode": "fastest;car",
       "waypoint0": "geo!37.786856,-122.398183",
       "waypoint1": "geo!37.786716,-122.398338",
@@ -102,7 +101,7 @@ class DisplayMapClass extends React.Component {
       "intensity": 12, // Light 0 horizontal
       "lineWidth": 10
     },
-    {  //Traffic light: Howard and 2nd NW to SE
+    {  // Traffic light: Howard and 2nd NW to SE
       "mode": "fastest;car",
       "waypoint0": "geo!37.786852,-122.398365",
       "waypoint1": "geo!37.786716,-122.398177",
@@ -247,6 +246,11 @@ class DisplayMapClass extends React.Component {
   fetchData = ()=>{
     RouteModels.all()
 	  .then(data=> console.log(data))
+    .then(data => {
+      this.setState({
+        data: data
+      })
+    })
   }
 
   render() {
