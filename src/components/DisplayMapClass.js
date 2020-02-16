@@ -47,7 +47,7 @@ class DisplayMapClass extends React.Component {
         endPoint = route.waypoint[1].mappedPosition
 
         let routeLine = new window.H.map.Polyline(linestring, {
-          style: {strokeColor: "red", lineWidth: 5}
+          arrows: {fillColor: "red"}
         })
 
         let startMarker = new window.H.map.Marker({
@@ -63,6 +63,8 @@ class DisplayMapClass extends React.Component {
         map.addObjects([routeLine, startMarker])
 
         map.getViewModel().setLookAtData({bounds: routeLine.getBoundingBox()})
+
+        map.addLayer(defaultLayers.vector.normal.traffic)
       }
     }
 
@@ -74,7 +76,9 @@ class DisplayMapClass extends React.Component {
 
     const behavior = new window.H.mapevents.Behavior(new window.H.mapevents.MapEvents(map));
 
-    const ui = window.H.ui.UI.createDefault(map, defaultLayers);
+    let ui = window.H.ui.UI.createDefault(map, defaultLayers).getControl('zoom').setEnabled(false);
+    // ui.f.zoom = false
+    // ui.getControl('zoom').setEnabled(false)
 
     this.setState({ map });
   }
