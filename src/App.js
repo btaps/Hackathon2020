@@ -1,5 +1,5 @@
 import React,{ Component} from 'react';
-import DisplayMapClass from './DisplayMapClass'
+import DisplayMapClass from './components/DisplayMapClass'
 
 import './App.css';
 
