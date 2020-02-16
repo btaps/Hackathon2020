@@ -17,7 +17,7 @@ class DisplayMapClass extends Component {
       defaultLayers.vector.normal.map,
       {
         // This map is centered over Europe
-	center:{lat: 37.7874102, lng:-122.3974609},
+	center:{lat: 37.7871, lng:-122.3965},
         zoom: 17.7,  //17.7
         pixelRatio: window.devicePixelRatio || 1,
       }
