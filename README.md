@@ -47,7 +47,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 ## Contributors
 
 * **Sachin Shastei** - ML Engineer
-* **Taylor Knulp-McDonna** - Data Engineer
+* **Taylor Kulp-McDowall** - ML Engineer
 * **Bruno Tapia Sierra** - Front end Developer
 * **Chang Seong Kang** Front End Developer
 *  **Sasha Tooryani** Devops Engineer
